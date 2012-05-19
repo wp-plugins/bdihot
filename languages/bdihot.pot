@@ -32,4 +32,3 @@ msgstr ""
 #: ../bdihot.php:151
 msgid "Title:"
 msgstr ""
-

@@ -44,7 +44,7 @@ function bdihot_translations() {
 // Set/Get plugin options
 function bdihot_options() {
 	$defaults = array(
-		'title' => __( 'Random Joke', 'Bdihot' ),
+		'title' => __( 'Random Joke', 'bdihot' ),
 		'jokes_number' => 1,
 	);
 	if ( ( !$options = get_option( 'bdihot_random_joke' ) ) || !is_array( $options ) )
@@ -67,7 +67,7 @@ function bdihot_feed_cache_lifetime() {
 
 // Register dashboard widget
 function bdihot_add_dashboard_widget() {
-	wp_add_dashboard_widget( 'bdihot_dashboard_random_joke', __( 'Random Joke', 'Bdihot' ), 'bdihot_widget_output' );
+	wp_add_dashboard_widget( 'bdihot_dashboard_random_joke', __( 'Random Joke', 'bdihot' ), 'bdihot_widget_output' );
 }
 
 
@@ -88,7 +88,7 @@ function bdihot_widget_output() {
 	endif;
 
 	if ( $max_items == 0 ) {
-		echo __('No Jokes found.', 'Bdihot');
+		echo __('No Jokes found.', 'bdihot');
     } else {
 		foreach ( $rss_items as $item ) : 
 			echo '<p><a href="' . esc_url( $item->get_permalink() ) . '" title="' . $item->get_date( 'j F Y | g:i a' ) .'" target="_blank">' . esc_html( $item->get_title() ) . '</a></p>';
@@ -116,8 +116,8 @@ class Bdihot_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'bdihot_widget',
-			__( 'Random Joke', 'Bdihot' ),
-			array( 'description' => __( 'Displays Random Joke from Bdihot.co.il', 'Bdihot' ), )
+			__( 'Random Joke', 'bdihot' ),
+			array( 'description' => __( 'Displays Random Joke from Bdihot.co.il', 'bdihot' ), )
 		);
 	}
 
@@ -144,11 +144,11 @@ class Bdihot_Widget extends WP_Widget {
 			$title = $instance[ 'title' ];
 		}
 		else {
-			$title = __( 'Random Joke', 'Bdihot' );
+			$title = __( 'Random Joke', 'bdihot' );
 		}
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'Bdihot' ); ?></label>
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'bdihot' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
 		</p>
 		<?php

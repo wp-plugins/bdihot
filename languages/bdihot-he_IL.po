@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: Bdihot\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2012-04-07 20:54+0200\n"
-"PO-Revision-Date: 2012-04-07 20:55+0200\n"
+"PO-Revision-Date: 2012-05-19 08:37+0200\n"
 "Last-Translator: Rami <r_a_m_i@hotmail.com>\n"
 "Language-Team: Rami <r_a_m_i@hotmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -31,4 +31,3 @@ msgstr "בדיחה אקראית מתוך אתר הבדיחות Bdihot.co.il"
 #: ../bdihot.php:151
 msgid "Title:"
 msgstr "כותרת:"
-

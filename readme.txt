@@ -1,5 +1,6 @@
 === Random Joke (Bdihot.co.il) ===
 Contributors: Rami Y
+Donate link: http://bdihot.co.il/
 Tags: bdihot, humor, jokes, random, joke
 Requires at least: 3.0
 Tested up to: 3.3
