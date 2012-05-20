@@ -3,7 +3,7 @@
  * Plugin Name: Random Joke (Bdihot.co.il)
  * Plugin URI: http://www.bdihot.co.il/wordpress_plugin/
  * Description: This plugin allows you to add a random joke (from bdihot.co.il) using wordpress Sidebar-Widget and Dashboard-Widget systems.
- * Version: 0.2
+ * Version: 0.3
  * Author: Rami Y
  * Author URI: http://www.bdihot.co.il/
  * License: GPL2
@@ -33,7 +33,7 @@ add_action( 'widgets_init', 'bdihot_add_sidebar_widget' );
  
 // Uninstall bdihot
 function bdihot_uninstall() {
-	delete_option('bdihot_random_joke');
+	delete_option( 'bdihot_random_joke' );
 }
 
 // Load translation POT files
@@ -44,8 +44,11 @@ function bdihot_translations() {
 // Set/Get plugin options
 function bdihot_options() {
 	$defaults = array(
-		'title' => __( 'Random Joke', 'bdihot' ),
+		'title' => __( 'Random Joke', bdihot ),
 		'jokes_number' => 1,
+		'jokes_title' => 'false',
+		'jokes_icon' => 'false',
+		'jokes_poweredby' => 'false',
 	);
 	if ( ( !$options = get_option( 'bdihot_random_joke' ) ) || !is_array( $options ) )
 		$options = array();
@@ -67,12 +70,12 @@ function bdihot_feed_cache_lifetime() {
 
 // Register dashboard widget
 function bdihot_add_dashboard_widget() {
-	wp_add_dashboard_widget( 'bdihot_dashboard_random_joke', __( 'Random Joke', 'bdihot' ), 'bdihot_widget_output' );
+	wp_add_dashboard_widget( 'bdihot_dashboard_random_joke', __( 'Random Joke', bdihot ), 'bdihot_widget_output' );
 }
 
 
 // The content of the widget (random joke)
-function bdihot_widget_output() {
+function bdihot_widget_output( $show_title = false, $show_icon = false ) {
 	include_once( ABSPATH . WPINC . '/feed.php' );
 
 	$widget_options = bdihot_options();
@@ -88,10 +91,11 @@ function bdihot_widget_output() {
 	endif;
 
 	if ( $max_items == 0 ) {
-		echo __('No Jokes found.', 'bdihot');
+		echo __('No Jokes found.', bdihot );
     } else {
-		foreach ( $rss_items as $item ) : 
-			echo '<p><a href="' . esc_url( $item->get_permalink() ) . '" title="' . $item->get_date( 'j F Y | g:i a' ) .'" target="_blank">' . esc_html( $item->get_title() ) . '</a></p>';
+		foreach ( $rss_items as $item ) :
+			/* if ( $show_icon == true ) echo ''; */
+			if ( $show_title == true ) echo '<p class="joke_title"><a href="' . esc_url( $item->get_permalink() ) . '" target="_blank">' . esc_html( $item->get_title() ) . '</a></p>';
 			echo wpautop( $item->get_description() );
 		endforeach;
 	}
@@ -116,8 +120,8 @@ class Bdihot_Widget extends WP_Widget {
 	public function __construct() {
 		parent::__construct(
 	 		'bdihot_widget',
-			__( 'Random Joke', 'bdihot' ),
-			array( 'description' => __( 'Displays Random Joke from Bdihot.co.il', 'bdihot' ), )
+			__( 'Random Joke', bdihot ),
+			array( 'description' => __( 'Display Random Jokes from Bdihot.co.il', bdihot ), )
 		);
 	}
 
@@ -125,9 +129,21 @@ class Bdihot_Widget extends WP_Widget {
 	public function widget( $args, $instance ) {
 		extract( $args );
 		$title = apply_filters( 'widget_title', $instance['title'] );
+		$jokes_title = empty( $instance['jokes_title'] ) ? '' : apply_filters( 'jokes_title', $instance['jokes_title'] );
+		$jokes_icon = empty( $instance['jokes_icon'] ) ? '' : apply_filters( 'jokes_icon', $instance['jokes_icon'] );
+		$jokes_poweredby = empty( $instance['jokes_poweredby'] ) ? '' : apply_filters( 'jokes_poweredby', $instance['jokes_poweredby'] );
 		echo $before_widget;
+		// title
 		if ( ! empty( $title ) ) echo $before_title . $title . $after_title;
-		bdihot_widget_output();
+		// content
+		bdihot_widget_output( $jokes_title, $jokes_icon );
+		// 
+		if ( $jokes_poweredby == true ) {
+			echo '<p class="joke_poweredby">';
+			_e( 'Powered by <a href="http://www.bdihot.co.il/">Bdihot.co.il</a>', bdihot );
+			echo '</p>';
+		}
+		echo '<!--// Joke by Bdihot.co.il //-->';
 		echo $after_widget;
 	}
 
@@ -135,6 +151,9 @@ class Bdihot_Widget extends WP_Widget {
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
 		$instance['title'] = strip_tags( $new_instance['title'] );
+		$instance['jokes_title'] = strip_tags( $new_instance['jokes_title'] );
+		$instance['jokes_icon'] = strip_tags( $new_instance['jokes_icon'] );
+		$instance['jokes_poweredby'] = strip_tags( $new_instance['jokes_poweredby'] );
 		return $instance;
 	}
 
@@ -144,12 +163,29 @@ class Bdihot_Widget extends WP_Widget {
 			$title = $instance[ 'title' ];
 		}
 		else {
-			$title = __( 'Random Joke', 'bdihot' );
+			$title = __( 'Random Joke', bdihot );
 		}
+		$jokes_title = strip_tags(stripslashes($new_instance['jokes_title']));
+		$jokes_icon = strip_tags(stripslashes($new_instance['jokes_icon']));
+		$jokes_poweredby = strip_tags(stripslashes($new_instance['jokes_poweredby']));
 		?>
 		<p>
-		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'bdihot' ); ?></label>
-		<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+		<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', bdihot ); ?></label>
+		<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $title ); ?>" />
+		</p>
+		<p>
+		<input type="checkbox" id="<?php echo $this->get_field_id( 'jokes_title' ); ?>" name="<?php echo $this->get_field_name( 'jokes_title' ); ?>" <?php if ( $instance['jokes_title'] ) echo 'checked="checked" '; ?>/>
+		<label for="<?php echo $this->get_field_id( 'jokes_title' ); ?>"><?php _e( 'Joke title', bdihot ); ?></label>
+		</p>
+		<!--
+		<p>
+		<input type="checkbox" id="<?php echo $this->get_field_id( 'jokes_icon' ); ?>" name="<?php echo $this->get_field_name( 'jokes_icon' ); ?>" <?php if ( $instance['jokes_icon'] ) echo 'checked="checked" '; ?>/>
+		<label for="<?php echo $this->get_field_id( 'jokes_icon' ); ?>"><?php _e( 'Joke icon', bdihot ); ?></label>
+		</p>
+		-->
+		<p>
+		<input type="checkbox" id="<?php echo $this->get_field_id( 'jokes_poweredby' ); ?>" name="<?php echo $this->get_field_name( 'jokes_poweredby' ); ?>" <?php if ( $instance['jokes_poweredby'] ) echo 'checked="checked" '; ?>/>
+		<label for="<?php echo $this->get_field_id( 'jokes_poweredby' ); ?>"><?php _e( 'Powered by <a href="http://www.bdihot.co.il/">Bdihot.co.il</a>', bdihot ); ?></label>
 		</p>
 		<?php
 	}

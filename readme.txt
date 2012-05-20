@@ -28,6 +28,10 @@ It's a pretty straightforward little plugin.
 
 == Changelog ==
 
+= 0.3 (20.05.2012) =
+* Joke title parameter to control the title display.
+* Powered by parameter to control the poweredby text display.
+
 = 0.2 (07.04.2012) =
 * Added Dashboard-Widget.
 
