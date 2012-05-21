@@ -1,24 +1,31 @@
 === Random Joke (Bdihot.co.il) ===
 Contributors: ramiy
-Donate link: http://bdihot.co.il/
-Tags: bdihot, humor, jokes, random, joke
+Tags: sidebar, widget, bdihot, humor, jokes, random, joke, hebrew, rtl
 Requires at least: 3.0
-Tested up to: 3.3
+Tested up to: 3.3.2
 Stable tag: trunk
 
-This plugin allows you to add a random joke (from bdihot.co.il) using wordpress Sidebar-Widget and Dashboard-Widget systems.
+This plugin allows you to add random joke to your site using wordpress sidebar widget.
 
 == Description ==
 
-This plugin allows you to add a random joke (from bdihot.co.il) using wordpress Sidebar-Widget and Dashboard-Widget systems.
+This plugin allows you to add random jokes from <a href="http://www.bdihot.co.il/">bdihot.co.il</a> website, using the wordpress widget systems.
+
+Display random jokes everywhere on your site. Add as many widgets as you need. Set each widget it's individual set of options.
+
+Features:
+
+* Dashboard widgets - random jokes in the back-end for the site operators.
+
+* Sidebar widgets - random jokes in the front-end for your users.
+
+For more information, installation instructions and screenshots, visit <a href="http://www.bdihot.co.il/wordpress_plugin/">plugin homepage</a>.
 
 == Installation ==
 
-It's a pretty straightforward little plugin.
-
-1. Upload plugin folder to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the 'Plugins' menu in WordPress.
-3. Visit your Dashboard to configure and enjoy the new widget.
+1. Add new plugin through 'Plugins' > 'Add New' menu in your WordPress dashboard.
+2. Search for 'bdihot'.
+3. Install the plugin and activate it.
 
 == Screenshots ==
 
