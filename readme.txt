@@ -2,8 +2,8 @@
 Contributors: ramiy
 Tags: sidebar, widget, bdihot, humor, jokes, random, joke, hebrew, rtl
 Requires at least: 3.0
-Tested up to: 3.3.2
-Stable tag: trunk
+Tested up to: 4.0
+Stable tag: 0.4
 
 This plugin allows you to add random joke to your site using wordpress sidebar widget.
 
@@ -16,7 +16,6 @@ Display random jokes everywhere on your site. Add as many widgets as you need. S
 Features:
 
 * Dashboard widgets - random jokes in the back-end for the site operators.
-
 * Sidebar widgets - random jokes in the front-end for your users.
 
 For more information, installation instructions and screenshots, visit <a href="http://www.bdihot.co.il/wordpress_plugin/">plugin homepage</a>.
@@ -34,6 +33,9 @@ For more information, installation instructions and screenshots, visit <a href="
 3. Random Joke on TwentyTen sidebar.
 
 == Changelog ==
+
+= 0.4 (03.10.2014) =
+* Tested up to WordPress 4.0
 
 = 0.3 (20.05.2012) =
 * Joke title parameter to control the title display.

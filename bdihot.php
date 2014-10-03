@@ -3,7 +3,7 @@
  * Plugin Name: Random Joke (Bdihot.co.il)
  * Plugin URI: http://www.bdihot.co.il/wordpress_plugin/
  * Description: This plugin allows you to add a random joke (from bdihot.co.il) using wordpress Sidebar-Widget and Dashboard-Widget systems.
- * Version: 0.3
+ * Version: 0.4
  * Author: Rami Y
  * Author URI: http://www.bdihot.co.il/
  * License: GPL2
