@@ -2,7 +2,7 @@
 Contributors: ramiy
 Tags: sidebar, widget, bdihot, humor, jokes, random, joke, hebrew, rtl
 Requires at least: 3.0
-Tested up to: 4.0
+Tested up to: 4.1.1
 Stable tag: 0.4
 
 This plugin allows you to add random joke to your site using wordpress sidebar widget.
